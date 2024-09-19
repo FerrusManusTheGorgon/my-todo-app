@@ -1,8 +1,15 @@
 import streamlit as st
 import functions
+import os
 
 FILEPATH = "todos.txt"
 # FILEPATH = "/Users/seanyoung/PycharmProjects/pythonProject/web_app1/todos.txt"
+if os.path.exists(FILEPATH):
+    todos = functions.get_todos(FILEPATH)
+else:
+    st.error(f"File not found: {FILEPATH}")
+    todos = []
+
 
 todos = functions.get_todos(FILEPATH)
 
