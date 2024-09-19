@@ -1,7 +1,8 @@
 import streamlit as st
 import functions
 
-FILEPATH = "/Users/seanyoung/PycharmProjects/pythonProject/web_app1/todos.txt"
+FILEPATH = "todos.txt"
+# FILEPATH = "/Users/seanyoung/PycharmProjects/pythonProject/web_app1/todos.txt"
 
 todos = functions.get_todos(FILEPATH)
 
