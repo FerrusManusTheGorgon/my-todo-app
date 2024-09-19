@@ -1,0 +1,8 @@
+prepare
+shower
+eat
+work
+hunt
+clean
+attack
+defend
