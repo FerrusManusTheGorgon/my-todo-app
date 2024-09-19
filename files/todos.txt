@@ -1,7 +1,0 @@
-prepare
-shower
-play
-fix
-Master Python
-arm
-break

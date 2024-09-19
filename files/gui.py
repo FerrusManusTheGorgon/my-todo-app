@@ -1,14 +1,27 @@
 import PySimpleGUI as sg
-import functions
-import time
+import sys
+print("Python executable:", sys.executable)
 
-sg.theme("DarkPurple4")
+import os
+print("Current working directory:", os.getcwd())
+
+import time
+sys.path.append('/Users/seanyoung/PycharmProjects/pythonProject/')
+import functions
+
+# Ensure the todos.txt file exists
+if not os.path.exists("/todos.txt"):
+    with open("/todos.txt", "w") as file:
+        pass
+
+sg.theme("Black")
 
 clock = sg.Text('', key="clock")
 label = sg.Text("Type in a to-do")
 input_box = sg.InputText(tooltip="Enter todo", key='todos')
-add_button = sg.Button("Add")
-list_box = sg.Listbox(values=functions.get_todos('/Users/seanyoung/PycharmProjects/pythonProject/files/todos.txt'), key='todos',
+add_button = sg.Button(size=2, image_source="/Users/seanyoung/PycharmProjects/pythonProject/files/add.png", mouseover_colors="LightBlue2",
+                       tooltip="Add", key="Add")
+list_box = sg.Listbox(values=functions.get_todos('/todos.txt'), key='todos',
                       enable_events=True, size=[45, 10])
 edit_button = sg.Button("Edit")
 complete_button = sg.Button("Complete")
@@ -16,8 +29,9 @@ exit_button = sg.Button("Exit")
 
 window = sg.Window('My To-Do App',
                    layout=[[clock],
-                           [label], [input_box],
-                           [add_button], [list_box, edit_button, complete_button],
+                           [label],
+                           [input_box, add_button],
+                           [list_box, edit_button, complete_button],
                            [exit_button]],
                    font=('Helvetica', 20))
 
@@ -29,10 +43,10 @@ while True:
     print(values['todos'])
     match event:
         case "Add":
-            todos = functions.get_todos('/Users/seanyoung/PycharmProjects/pythonProject/files/todos.txt')
+            todos = functions.get_todos('/todos.txt')
             new_todo = values['todos'] + "\n"
             todos.append(new_todo)
-            functions.write_todos('/Users/seanyoung/PycharmProjects/pythonProject/files/todos.txt', todos)
+            functions.write_todos('/todos.txt', todos)
         case "Edit":
             try:
                 todo_to_edit = values['todos'][0]
